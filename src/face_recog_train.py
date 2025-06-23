@@ -3,11 +3,11 @@ import os
 import numpy as np
 
 people = []
-for i in os.listdir(r'C:\Users\Lakhv\Desktop\projects\mouse\faces') :
+for i in os.listdir(r'..\faces') :
     people.append(i)
     
 haar_cascade = cv.CascadeClassifier('face_detect.xml')
-dir  = r'C:\Users\Lakhv\Desktop\projects\mouse\faces'
+dir  = r'..\faces'
 features = []
 labels = []
 

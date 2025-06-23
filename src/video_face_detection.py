@@ -3,11 +3,11 @@ import numpy as np
 import os
 haar_cas = cv.CascadeClassifier('face_detect.xml')
 people = []
-for i in os.listdir(r'C:\Users\Lakhv\Desktop\projects\mouse\faces') :
+for i in os.listdir(r'..\faces') :
     people.append(i)
 
 print(people)
-features  = np.load('C:\Users\Lakhv\Desktop\projects\mouse\src\features.npy',allow_pickle=True)
+features  = np.load('features.npy',allow_pickle=True)
 labels = np.load('labels.npy')
 
 face_recongnizer = cv.face.LBPHFaceRecognizer_create()
@@ -28,13 +28,15 @@ def live_face_rec(frame) :
         print(people[label] ," with  a confidence of ",confidence)
         cv.putText(img,f"{people[label]}",(x,y-10),cv.FONT_HERSHEY_COMPLEX,1,(0,255,0),1)
 
-        # cv.imshow("imd",img)
-        return img
+    return img
 
 
 video = cv.VideoCapture(0)
 while True:
     ret,frame  = video.read()
+    if not ret:
+        print("Failed to grab frame from camera.")
+        break
     frame = cv.flip(frame,1)
     frame = live_face_rec(frame)
     cv.imshow("cam",frame)
